@@ -1,27 +1,27 @@
 <?php
 if (isset($_FILES['csv-file']) && $_FILES['csv-file']['error'] == 0) {
 
-    $filename = $_FILES['csv-file']['tmp_name'];
+    $csvFile = $_FILES['csv-file']['tmp_name'];
 
-    function csvParser($filename)
+    function csvParser($csvFile)
     {
         ob_start();
-        if (($handle = fopen($filename, 'r')) !== false) {
-            $header = null;
-            $data = [];
-            while (($row = fgetcsv($handle, 1000, ",")) !== false) {
-                if (!$header) {
-                    $header = $row;
+        if (($handle = fopen($csvFile, 'r')) !== false) {
+            $theHeader = null;
+            $csvData = [];
+            while (($theRow = fgetcsv($handle, 1000, ",")) !== false) {
+                if (!$theHeader) {
+                    $theHeader = $theRow;
                 } else {
-                    $data[] = array_combine($header, $row);
+                    $csvData[] = array_combine($theHeader, $theRow);
                 }
             }
         }
         fclose($handle);
         ob_end_flush();
-        echo json_encode($data);
+        echo json_encode($csvData);
     }
 
     header('Content-Type: application/json');
-    csvParser($filename);
+    csvParser($csvFile);
 }
