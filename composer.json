@@ -1,0 +1,16 @@
+{
+    "name": "john_christian/csv",
+    "description": "csv parser",
+    "authors": [
+        {
+            "name": "John Christian Anay",
+            "email": "anayjohnchristian@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "CSV\\Parser\\": "src/"
+        }
+    }
+}
